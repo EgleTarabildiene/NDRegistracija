@@ -1,0 +1,69 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            Pridėti naują imone
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="newCompanySubmit(f)" #f="ngForm">
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-2 col-form-label text-end">Imones pavadinimas:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" id="" class="form-control" [class.is-invalid]="!inputName.valid && inputName.touched" ngModel required minlength="2" maxlength="30" pattern="[a-zA-Z ]*" #inputName="ngModel">
+                        <div class="helper-block " *ngIf="!inputName.valid && inputName.touched">
+                            Imonės pavadinimas yra privalomas, turi būti 2-30 simbolių ilgio, galima įvesti tik raides ir tarpą
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-2 col-form-label text-end">Įmonės kodas:</label>
+                    <div class="col-sm-10">
+                        <input type="number" name="companyCode" id="" class="form-control" [class.is-invalid]="!inputCompanyCode.valid && inputCompanyCode.touched" ngModel required #inputCompanyCode="ngModel">
+                        <div class="helper-block " *ngIf="!inputCompanyCode.valid && inputCompanyCode.touched">
+                            Imonės kodas yra privalomas
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-2 col-form-label text-end">PVM registracijos kodas:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="pvmCode" id="" class="form-control" [class.is-invalid]="!inputPvmCode.valid && inputPvmCode.touched" ngModel required #inputPvmCode="ngModel" pattern="^LT\d{4,15}$" placeholder="LT000000000">
+                        <div class="helper-block " *ngIf="!inputPvmCode.valid && inputPvmCode.touched">
+                            PVM regisracijos laukelis yra privalomas
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label text-end">Adresas:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="adress" id="" class="form-control" [class.is-invalid]="!inputAdress.valid && inputAdress.touched" ngModel required #inputAdress="ngModel">
+                            <div class="helper-block " *ngIf="!inputAdress.valid && inputAdress.touched">
+                                Adreso laukelis yra privalomas
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label text-end">El. paštas:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="email" id="" class="form-control" [class.is-invalid]="!inputEmail.valid && inputEmail.touched" ngModel required email #inputEmail="ngModel">
+                            <div class="helper-block " *ngIf="!inputEmail.valid && inputEmail.touched">
+                                Elektroninis paštas yra privalomas, turi būti pateiktas validus elektroninis paštas
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label text-end">Telefono numeris:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="phone" id="" class="form-control" [class.is-invalid]="!inputPhone.valid && inputPhone.touched" ngModel required appNumberValidator minlength="10" maxlength="12" pattern="^\+370[6-9][0-9]{7}$" placeholder="+37000000000" #inputPhone="ngModel">
+                            <div class="helper-block " *ngIf="!inputPhone.valid && inputPhone.touched">
+                                Telefono numeris yra privalomas
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offset-sm-2">
+                        <button type="submit" class="btn btn-success">Pridėti naują imonę</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
