@@ -1,0 +1,88 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            Pridėti naują kontakta
+        </div>
+        <div class="card-body">
+            <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Vardas:</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" [class.is-invalid]="!employeeForm.get('name')?.valid && employeeForm.get('name')?.touched" formControlName="name">
+                        <div class="helper-block" *ngIf="!employeeForm.get('name')?.valid && employeeForm.get('name')?.touched">
+                            Vardas yra privalomas ir ne trumpesnis nei 3 simboliai
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Pavarde:</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" [class.is-invalid]="!employeeForm.get('surname')?.valid && employeeForm.get('surname')?.touched" formControlName="surname">
+                        <div class="helper-block " *ngIf="!employeeForm.get('surname')?.valid && employeeForm.get('surname')?.touched">
+                            Pavarde yra privaloma ir ne trumpesne nei 3 simboliai
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Pareigos:</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" [class.is-invalid]="!employeeForm.get('duties')?.valid && employeeForm.get('duties')?.touched" formControlName="duties">
+                        <div class="helper-block" *ngIf="!employeeForm.get('duties')?.valid && employeeForm.get('duties')?.touched">
+                            Pareigos yra privalomas ir ne trumpesnes nei 3 simboliai
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Tipas:</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" formControlName="workCompany">
+                            <option value="v">Valstybine</option>
+                            <option value="p">Privati</option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Telefono numeris:</label>
+                    <div class="col-sm-9">
+                        <div class="row" formArrayName="phoneNumbers">
+                            <div class="col-sm-12 mb-3" *ngFor="let phoneNumber of phoneNumbers; let i=index ">
+                                <input type="text" class="form-control" [formControlName]="i">
+                            </div>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-secondary me-3" (click)="addPhoneField()">Pridėti papildomą telefono numeri</button>
+                            <button type="button" class="btn btn-danger" (click)="removePhoneField()">Pašalinti papildomą laukeli</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="mb-3 row">
+                    <div class="col-sm-2 offset-sm-2">
+                        <button class="btn btn-success " [disabled]="!employeeForm.valid">Pridėti</button>
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--   duties:string|null=null;
+     workCompany:string|null=null;
+     phonenumbers:string[]=[];-->
