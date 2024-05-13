@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { EmployeesService } from '../../../services/employees.service';
+import { CompaniesService } from '../../../services/companies.service';
+import { Company } from '../../../models/company';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-new-employee',
@@ -13,7 +16,10 @@ import { EmployeesService } from '../../../services/employees.service';
 export class NewEmployeeComponent {
 public employeeForm: FormGroup;
 
-constructor(private employeesService:EmployeesService){
+
+public companies:Company[]=[];
+
+constructor(private employeesService:EmployeesService, private companiesService:CompaniesService){
  this.employeeForm=new FormGroup({
      'name':new FormControl(null, [Validators.required, Validators.minLength(3)]),
      'surname':new FormControl(null, [Validators.required, Validators.minLength(3)]),
@@ -23,7 +29,14 @@ constructor(private employeesService:EmployeesService){
       new FormControl(null, Validators.required)
      ]),
   
- })
+ });
+this.companiesService.loadCompanies().subscribe((data)=>{
+this.companies=data;
+})
+
+
+
+
 }
 
 
@@ -39,6 +52,14 @@ constructor(private employeesService:EmployeesService){
       ];
     })
     
+  }
+
+  static createUniqueInvNumberValidator(employeesService:EmployeesService){
+    return (control:FormControl):Promise<ValidationErrors | null> | Observable<ValidationErrors | null>=>{
+   
+      return  employeesService.loadEmployees().pipe(map((data)=> null));
+    };
+
   }
 
 

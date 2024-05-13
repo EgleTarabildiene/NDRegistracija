@@ -41,11 +41,11 @@
 
 
                 <div class="mb-3 row">
-                    <label for="" class="col-sm-3 col-form-label text-end">Tipas:</label>
+                    <label for="" class="col-sm-3 col-form-label text-end">Imone:</label>
                     <div class="col-sm-9">
                         <select class="form-control" formControlName="workCompany">
-                            <option value="v">Valstybine</option>
-                            <option value="p">Privati</option>
+                            <option *ngFor="let company of companies; let i = index" [value]="company.id">{{company.name}}</option>
+
                         </select>
 
                     </div>

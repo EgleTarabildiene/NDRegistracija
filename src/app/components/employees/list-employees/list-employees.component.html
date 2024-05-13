@@ -1,0 +1,48 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            Pridėti naują kontaktą
+        </div>
+        <div class="card-body">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>Vardas</th>
+                        <th>Pavarde</th>
+                        <th>Pareigos</th>
+                        <th>Imone</th>
+                        <th>Telefono numeris</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees; let i=index">
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.surname }}</td>
+                        <td>{{ employee.duties }}</td>
+                        <td>{{ employee.workCompany?.name}}</td>
+
+                        <td>
+                            <div *ngFor="let phoneNumber of employee.phoneNumbers">
+                                {{ phoneNumber }}
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!--
+public id:string|null=null;
+public name:string|null=null;
+public surname:string|null=null;
+public duties:string|null=null;
+public workCompany:string|null=null;
+public phoneNumbers:string[]=[];-->
