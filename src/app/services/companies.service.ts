@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Company } from '../models/company';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +30,27 @@ return copn;
   })
 )
 }
+
+
+public static createUniqueEmailValidator(companiesService:CompaniesService):AsyncValidatorFn{
+  return (control: AbstractControl): Observable<ValidationErrors | null>=>{
+    return companiesService.loadCompanies().pipe(
+      map((data)=>{
+        let error=false;
+        data.forEach((v, k)=>{
+        if (control.value==v.email){
+            error = true;
+                }
+        });
+        if (error){
+          return {"error": "Toks elektoninio pasto adresas jau egzistuoja"};
+        } else{
+            return null;
+        }
+      
+      })
+    );
+  }
+}
+
 }
