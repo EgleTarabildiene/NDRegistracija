@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" (click)="captionClick()">
             Pridėti naują kontakta
         </div>
         <div class="card-body">
@@ -8,7 +8,7 @@
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Vardas:</label>
                     <div class="col-sm-9">
-                        <input class="form-control" [class.is-invalid]="!employeeForm.get('name')?.valid && employeeForm.get('name')?.touched" formControlName="name">
+                        <input class="form-control" [class.is-invalid]="!employeeForm.get('name')?.valid && employeeForm.get('name')?.touched" formControlName="name" [@inputFields]="inputState[0]" (focus)="inputFocus(0, true)" (blur)="inputFocus(0, false)">
                         <div class="helper-block" *ngIf="!employeeForm.get('name')?.valid && employeeForm.get('name')?.touched">
                             Vardas yra privalomas ir ne trumpesnis nei 3 simboliai
                         </div>
@@ -21,7 +21,7 @@
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Pavarde:</label>
                     <div class="col-sm-9">
-                        <input class="form-control" [class.is-invalid]="!employeeForm.get('surname')?.valid && employeeForm.get('surname')?.touched" formControlName="surname">
+                        <input class="form-control" [class.is-invalid]="!employeeForm.get('surname')?.valid && employeeForm.get('surname')?.touched" formControlName="surname" [@inputFields]="inputState[1]" (focus)="inputFocus(1, true)" (blur)="inputFocus(1, false)">
                         <div class="helper-block " *ngIf="!employeeForm.get('surname')?.valid && employeeForm.get('surname')?.touched">
                             Pavarde yra privaloma ir ne trumpesne nei 3 simboliai
                         </div>
@@ -31,7 +31,7 @@
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Pareigos:</label>
                     <div class="col-sm-9">
-                        <input class="form-control" [class.is-invalid]="!employeeForm.get('duties')?.valid && employeeForm.get('duties')?.touched" formControlName="duties">
+                        <input class="form-control" [class.is-invalid]="!employeeForm.get('duties')?.valid && employeeForm.get('duties')?.touched" formControlName="duties" [@inputFields]="inputState[2]" (focus)="inputFocus(2, true)" (blur)="inputFocus(2, false)">
                         <div class="helper-block" *ngIf="!employeeForm.get('duties')?.valid && employeeForm.get('duties')?.touched">
                             Pareigos yra privalomas ir ne trumpesnes nei 3 simboliai
                         </div>
@@ -43,7 +43,7 @@
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Imone:</label>
                     <div class="col-sm-9">
-                        <select class="form-control" formControlName="workCompany">
+                        <select class="form-control" formControlName="workCompany" [@inputFields]="inputState[3]" (focus)="inputFocus(3, true)" (blur)="inputFocus(3, false)">
                             <option *ngFor="let company of companies; let i = index" [value]="company.id">{{company.name}}</option>
 
                         </select>
@@ -56,7 +56,7 @@
                     <label for="" class="col-sm-3 col-form-label text-end">Telefono numeris:</label>
                     <div class="col-sm-9">
                         <div class="row" formArrayName="phoneNumbers">
-                            <div class="col-sm-12 mb-3" *ngFor="let phoneNumber of phoneNumbers; let i=index ">
+                            <div class="col-sm-12 mb-3" *ngFor="let phoneNumber of phoneNumbers; let i=index " [@phoneInput]>
                                 <input type="text" class="form-control" [formControlName]="i">
                             </div>
 
@@ -71,7 +71,7 @@
                 <hr>
                 <div class="mb-3 row">
                     <div class="col-sm-2 offset-sm-2">
-                        <button class="btn btn-success " [disabled]="!employeeForm.valid">Pridėti</button>
+                        <button class="btn btn-success " [disabled]="!employeeForm.valid" [@caption]="captionState">Pridėti</button>
                     </div>
 
                 </div>
